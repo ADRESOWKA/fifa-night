@@ -43,7 +43,40 @@
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 @media(max-width:650px){.profilebox{grid-template-columns:1fr}.profilebox img{max-width:330px;margin:auto}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.meta{padding:10px 7px}.meta b{font-size:15px}.profile-intro{padding:20px 8px}.intro-sub{font-size:9px}}
-</style></head><body><main class="wrap"><header class="top"><div class="eyebrow">EDYCJA SPECJALNA • 2026</div><h1>FIFA NIGHT</h1><p>Pięciu zawodników. Jedna korona. Zero litości.</p></header><div class="rule"></div><section id="home"><div class="grid" id="cards"></div><div class="footer">ULTIMATE TEAM • FRIENDS LEAGUE</div></section><section id="profile" class="profile hidden"><a class="back" href="?">← POWRÓT DO ZAWODNIKÓW</a><div id="profileContent"></div></section></main>
+
+/* EKRAN VS — przedmeczowa prezentacja dwóch zawodników */
+.vs-launch{display:block;margin:0 auto 26px;padding:14px 28px;border:1px solid #f0d17a;border-radius:999px;background:linear-gradient(135deg,#e6c36c,#8e6826);color:#111;font-weight:1000;letter-spacing:.16em;font-size:14px;cursor:pointer;box-shadow:0 8px 28px #d4a94344}
+.vs-launch:hover,.vs-start:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.vs-panel{max-width:900px;margin:0 auto 30px;padding:24px;border:1px solid #9b8148;border-radius:18px;background:linear-gradient(145deg,#182433,#080d15);box-shadow:0 18px 48px #0009;text-align:center}
+.vs-panel h2{color:var(--gold);letter-spacing:.16em;margin:0 0 8px;font-size:clamp(24px,5vw,38px)}
+.vs-panel>p{color:var(--muted);margin:0 0 22px}
+.vs-picks{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.vs-pick{min-width:0;text-align:center}.vs-pick label{display:block;color:#e9d18d;font-size:11px;font-weight:900;letter-spacing:.22em;margin-bottom:9px}
+.vs-pick select{width:100%;padding:13px 12px;border-radius:9px;border:1px solid #b99b54;background:#0b111b;color:#fff;font-size:16px;font-weight:800}
+.vs-symbol{font-size:clamp(28px,6vw,54px);font-weight:1000;font-style:italic;color:#f5d47b;text-shadow:0 0 18px #d9a83b}
+.vs-start{margin-top:22px;padding:14px 30px;border:1px solid #f1d78f;border-radius:8px;background:linear-gradient(120deg,#f1d78f,#9a722c);color:#10131a;font-weight:1000;letter-spacing:.18em;cursor:pointer;transition:.2s}
+.vs-error{min-height:18px;color:#ffb3a8;font-size:13px;margin-top:12px}
+.vs-stage{position:fixed;inset:0;z-index:10000;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#253746 0,#0a101a 48%,#020409 100%);color:#fff;display:flex;align-items:center;justify-content:center}
+.vs-stage:before{content:"";position:absolute;inset:-35%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0 9deg,#d9b75b20 10deg 11deg,transparent 13deg 22deg);animation:beam-spin 18s linear infinite}
+.vs-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#07101ee8 0%,transparent 40%,transparent 60%,#07101ee8 100%);pointer-events:none}
+.vs-topline{position:absolute;z-index:4;top:6%;left:0;right:0;text-align:center;color:#f0d58e;font-size:clamp(10px,2vw,15px);letter-spacing:.55em;font-weight:900}
+.vs-duel{position:relative;z-index:2;width:min(1100px,96vw);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(5px,2vw,24px)}
+.vs-side{position:relative;min-width:0;text-align:center;animation:vs-side-in .9s cubic-bezier(.16,.9,.3,1) both}
+.vs-side:last-child{animation-delay:.18s}
+.vs-photo{height:min(58vh,520px);width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 0 28px #d7b65c66);mask-image:linear-gradient(to bottom,#000 0 84%,transparent 100%)}
+.vs-silhouette{height:min(58vh,520px);display:grid;place-items:center;font-size:clamp(110px,22vw,250px);color:#c9aa60;text-shadow:0 0 45px #d9b75b66}
+.vs-player-name{font-size:clamp(22px,4.5vw,52px);font-weight:1000;letter-spacing:.12em;color:#f5d985;text-shadow:0 3px 20px #000;margin-top:-8px}
+.vs-player-rating{font-size:clamp(17px,2.7vw,28px);font-weight:900;letter-spacing:.2em}
+.vs-mid{position:relative;z-index:3;font-size:clamp(46px,10vw,116px);font-weight:1000;font-style:italic;color:#fff;text-shadow:0 0 10px #fff,0 0 35px #dcae45,0 0 70px #dcae45;transform:skew(-10deg);animation:vs-pulse 1.5s ease-in-out infinite alternate}
+.vs-bottomline{position:absolute;z-index:4;bottom:7%;left:0;right:0;text-align:center;color:#d8dce2;font-size:clamp(10px,1.7vw,14px);letter-spacing:.3em}
+.vs-close{position:absolute;z-index:6;right:18px;top:18px;border:1px solid #e6c16c;background:#090b10bb;color:#ffe6a2;padding:10px 15px;border-radius:30px;font-weight:bold;cursor:pointer}
+.vs-stage.reveal .vs-mid{animation:vs-impact .65s cubic-bezier(.1,1.5,.3,1) both}
+@keyframes vs-side-in{from{opacity:0;transform:translateX(-90px) scale(.88)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes vs-pulse{from{filter:brightness(.8);transform:skew(-10deg) scale(.96)}to{filter:brightness(1.4);transform:skew(-10deg) scale(1.06)}}
+@keyframes vs-impact{0%{transform:skew(-10deg) scale(2.4);opacity:0}100%{transform:skew(-10deg) scale(1);opacity:1}}
+@media(max-width:620px){.vs-panel{padding:18px 12px}.vs-picks{gap:7px}.vs-pick select{font-size:13px;padding:11px 5px}.vs-photo,.vs-silhouette{height:42vh}.vs-player-name{font-size:clamp(16px,5vw,27px);letter-spacing:.06em}.vs-player-rating{font-size:13px}.vs-topline{letter-spacing:.28em}.vs-bottomline{letter-spacing:.12em}}
+
+</style></head><body><main class="wrap"><header class="top"><div class="eyebrow">EDYCJA SPECJALNA • 2026</div><h1>FIFA NIGHT</h1><p>Pięciu zawodników. Jedna korona. Zero litości.</p></header><div class="rule"></div><section id="home"><button class="vs-launch" type="button" onclick="toggleVSPanel()">⚔  OTWÓRZ EKRAN VS  ⚔</button><div id="vsPanel" class="vs-panel hidden"><h2>PRZED MECZEM</h2><p>Wybierz dwóch zawodników i rozpocznij prezentację pojedynku na dużym ekranie.</p><div class="vs-picks"><div class="vs-pick"><label>GOSPODARZ</label><select id="vsHome"></select></div><div class="vs-symbol">VS</div><div class="vs-pick"><label>GOŚĆ</label><select id="vsAway"></select></div></div><button class="vs-start" type="button" onclick="startVS()">ROZPOCZNIJ POJEDYNEK</button><div class="vs-error" id="vsError"></div></div><div class="grid" id="cards"></div><div class="footer">ULTIMATE TEAM • FRIENDS LEAGUE</div></section><section id="profile" class="profile hidden"><a class="back" href="?">← POWRÓT DO ZAWODNIKÓW</a><div id="profileContent"></div></section></main>
 <script>
 const players=[
 {id:'tomek',name:'TOMEK',ovr:89,pos:'ST',slogan:'JEBANA FIFA',stats:{PAC:85,SHO:90,PAS:78,DRI:88,DEF:45,PHY:99},special:'TO GRA JEST ZEPSUTA',img:null},
@@ -71,6 +104,32 @@ function playPlayerWalkout(p){
   setTimeout(finish,7900);
 }
 function showPlayer(p){document.getElementById('home').classList.add('hidden');document.getElementById('profile').classList.remove('hidden');document.getElementById('profileContent').innerHTML=`<div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div><div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>`}
+function toggleVSPanel(){
+  const panel=document.getElementById('vsPanel');panel.classList.toggle('hidden');
+  if(!panel.classList.contains('hidden')){
+    const options=players.map(p=>`<option value="${p.id}">${p.name} • ${p.ovr} OVR</option>`).join('');
+    document.getElementById('vsHome').innerHTML=options;
+    document.getElementById('vsAway').innerHTML=options;
+    document.getElementById('vsHome').value='dyzio';
+    document.getElementById('vsAway').value='mati';
+    panel.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+function startVS(){
+  const home=players.find(p=>p.id===document.getElementById('vsHome').value);
+  const away=players.find(p=>p.id===document.getElementById('vsAway').value);
+  const error=document.getElementById('vsError');
+  if(!home||!away)return;
+  if(home.id===away.id){error.textContent='Wybierz dwóch różnych zawodników.';return;}
+  error.textContent='';
+  const side=(p)=>`<div class="vs-side">${p.img?`<img class="vs-photo" src="${p.img}" alt="${p.name}">`:`<div class="vs-silhouette">⚽</div>`}<div class="vs-player-name">${p.name}</div><div class="vs-player-rating">${p.ovr} OVR • ${p.pos}</div></div>`;
+  const stage=document.createElement('div');stage.className='vs-stage';
+  stage.innerHTML=`<div class="vs-topline">FIFA NIGHT • MATCHDAY</div><button class="vs-close" type="button">ZAMKNIJ ✕</button><div class="vs-duel">${side(home)}<div class="vs-mid">VS</div>${side(away)}</div><div class="vs-bottomline">${home.name}  VS  ${away.name} • NIECH WYGRA LEPSZY</div>`;
+  document.body.appendChild(stage);
+  requestAnimationFrame(()=>stage.classList.add('reveal'));
+  const close=()=>stage.remove();stage.querySelector('.vs-close').addEventListener('click',close);
+  const esc=(e)=>{if(e.key==='Escape'){close();document.removeEventListener('keydown',esc)}};document.addEventListener('keydown',esc);
+}
 const id=new URLSearchParams(location.search).get('player');
 const chosen=players.find(p=>p.id===id);
 let walkoutOverlay=null;
