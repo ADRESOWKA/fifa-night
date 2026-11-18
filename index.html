@@ -11,6 +11,35 @@
 .profile-intro:after{content:"";position:absolute;z-index:-1;left:-20%;right:-20%;bottom:-65px;height:130px;background:radial-gradient(ellipse,#e8c76b66,transparent 68%);filter:blur(12px)}
 .stadium-label{font-size:10px;letter-spacing:.42em;color:#e9d18d;font-weight:900}.intro-name{font-size:clamp(28px,7vw,54px);font-weight:1000;letter-spacing:.12em;margin:9px 0 0;text-shadow:0 0 22px #e4bf5d88}.intro-rating{display:flex;justify-content:center;align-items:baseline;gap:9px;margin:2px 0}.intro-rating strong{font-size:clamp(58px,13vw,92px);line-height:1;color:#f3d47e;text-shadow:0 0 12px #e6c66c,0 0 36px #c99539;animation:rating-pop .9s cubic-bezier(.15,1.5,.4,1) .25s both}.intro-rating span{font-size:14px;letter-spacing:.2em;color:#fff}.intro-sub{font-size:11px;color:#d7e2e1;letter-spacing:.25em}.profilebox{animation:card-reveal .85s cubic-bezier(.2,.8,.2,1) .12s both;transform-origin:50% 65%}.profilebox img,.profilebox .placeholder{box-shadow:0 0 0 1px #e9cb7a,0 0 26px #e2b95055}.special{position:relative;overflow:hidden}.special:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-60%;width:35%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,#fff6,transparent);animation:shine 3.2s ease-in-out 1s infinite}.player:active{transform:scale(.98)}
 @keyframes intro-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes beams{from{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes rating-pop{0%{opacity:0;transform:scale(.25) rotate(-12deg)}70%{opacity:1;transform:scale(1.12) rotate(2deg)}100%{transform:scale(1) rotate(0)}}@keyframes card-reveal{0%{opacity:0;transform:perspective(900px) rotateX(18deg) translateY(35px) scale(.94)}100%{opacity:1;transform:perspective(900px) rotateX(0) translateY(0) scale(1)}}@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+
+/* DYZIO WALKOUT — pełnoekranowe wejście przed kartą */
+.walkout{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#03050a;color:#f9e8b2;perspective:900px}
+.walkout.fade-out{animation:walkout-exit .9s ease forwards;pointer-events:none}
+.walkout-bg{position:absolute;inset:-12%;background:radial-gradient(ellipse at 50% 48%,#75501c 0,#201507 27%,#05070c 67%);animation:tunnel-push 7.8s cubic-bezier(.2,.65,.25,1) forwards}
+.walkout-tunnel{position:absolute;inset:8% 18%;border:3px solid #e7bd58;transform:perspective(600px) rotateX(8deg) scale(.65);box-shadow:0 0 22px #e8b84e, inset 0 0 35px #e8b84e66;clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);animation:tunnel-open 3.3s ease-out forwards}
+.walkout-tunnel:before,.walkout-tunnel:after{content:"";position:absolute;inset:0;border:2px solid #ffe4a0;clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);transform:scale(.82);opacity:.8}
+.walkout-tunnel:after{transform:scale(.64);opacity:.45}
+.walkout-beams{position:absolute;inset:-30%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 10deg,#ffd77a22 11deg 12deg,transparent 14deg 22deg);animation:beam-spin 12s linear infinite;mix-blend-mode:screen}
+.walkout-floor{position:absolute;left:0;right:0;bottom:-12%;height:43%;background:linear-gradient(transparent,#e6ad3b18),repeating-linear-gradient(90deg,transparent 0 9%,#f4c45c22 9.2% 9.5%,transparent 10% 20%);transform:perspective(300px) rotateX(62deg);transform-origin:top;filter:blur(1px)}
+.walkout-smoke{position:absolute;inset:45% -20% 0;background:radial-gradient(ellipse at 20% 50%,#d5d5d533,transparent 35%),radial-gradient(ellipse at 70% 45%,#eee4d133,transparent 38%);filter:blur(22px);animation:smoke-drift 5s ease-in-out infinite alternate}
+.walkout-person{position:absolute;bottom:-5%;height:min(72vh,680px);width:min(55vw,470px);object-fit:cover;object-position:50% 22%;border-radius:46% 46% 8px 8px;filter:brightness(.35) contrast(1.2);opacity:0;mask-image:linear-gradient(to bottom,#000 0 78%,transparent 100%);animation:person-reveal 7.2s ease forwards}
+.walkout-copy{position:relative;z-index:2;text-align:center;text-shadow:0 3px 18px #000;margin-top:-2vh;padding:16px}
+.walkout-kicker{font-size:clamp(10px,2vw,15px);letter-spacing:.55em;color:#ffe7a3;opacity:0;animation:copy-in .7s 1.2s forwards}
+.walkout-title{font-size:clamp(38px,9vw,100px);font-weight:1000;letter-spacing:.12em;color:#f7d77f;text-shadow:0 0 12px #ffc34b,0 0 38px #c58b2d;opacity:0;transform:scale(.7);animation:title-in .9s 4.2s cubic-bezier(.15,1.4,.4,1) forwards}
+.walkout-ovr{font-size:clamp(17px,3vw,30px);font-weight:900;letter-spacing:.3em;opacity:0;animation:copy-in .8s 5s forwards}
+.walkout-slogan{font-size:clamp(12px,2.3vw,20px);letter-spacing:.12em;color:#fff0c2;opacity:0;animation:copy-in .8s 5.7s forwards}
+.walkout-skip{position:absolute;z-index:5;right:18px;top:18px;border:1px solid #e6c16c;background:#090b10bb;color:#ffe6a2;padding:10px 15px;border-radius:30px;font-weight:bold;cursor:pointer}
+@keyframes tunnel-push{0%{transform:scale(1.45)}100%{transform:scale(.92)}}
+@keyframes tunnel-open{0%{opacity:.2;transform:perspective(600px) rotateX(8deg) scale(.35)}100%{opacity:1;transform:perspective(600px) rotateX(8deg) scale(1.1)}}
+@keyframes beam-spin{to{transform:rotate(360deg)}}
+@keyframes smoke-drift{from{transform:translateX(-4%) scale(1)}to{transform:translateX(5%) scale(1.15)}}
+@keyframes person-reveal{0%,28%{opacity:0;transform:translateY(90px) scale(.9)}48%{opacity:.65;filter:brightness(.55) contrast(1.15)}72%,100%{opacity:1;filter:brightness(.95) contrast(1.05);transform:translateY(0) scale(1)}}
+@keyframes copy-in{to{opacity:1}}
+@keyframes title-in{to{opacity:1;transform:scale(1)}}
+@keyframes walkout-exit{to{opacity:0;visibility:hidden}}
+@media(max-width:650px){.walkout-person{width:82vw;height:62vh}.walkout-tunnel{inset:12% 8%}}
+@media(prefers-reduced-motion:reduce){.walkout *{animation-duration:.01ms!important;animation-delay:0ms!important}}
+
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 @media(max-width:650px){.profilebox{grid-template-columns:1fr}.profilebox img{max-width:330px;margin:auto}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.meta{padding:10px 7px}.meta b{font-size:15px}.profile-intro{padding:20px 8px}.intro-sub{font-size:9px}}
 </style></head><body><main class="wrap"><header class="top"><div class="eyebrow">EDYCJA SPECJALNA • 2026</div><h1>FIFA NIGHT</h1><p>Pięciu zawodników. Jedna korona. Zero litości.</p></header><div class="rule"></div><section id="home"><div class="grid" id="cards"></div><div class="footer">ULTIMATE TEAM • FRIENDS LEAGUE</div></section><section id="profile" class="profile hidden"><a class="back" href="?">← POWRÓT DO ZAWODNIKÓW</a><div id="profileContent"></div></section></main>
@@ -25,6 +54,21 @@ const players=[
 const cards=document.getElementById('cards');
 function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
+function playDyzioWalkout(){
+  if(new URLSearchParams(location.search).get('player')!=='dyzio') return;
+  const overlay=document.createElement('div'); overlay.className='walkout'; overlay.innerHTML=`
+    <div class="walkout-bg"></div><div class="walkout-beams"></div><div class="walkout-tunnel"></div>
+    <div class="walkout-floor"></div><div class="walkout-smoke"></div>
+    <img class="walkout-person" src="assets/dyzio.png" alt="">
+    <div class="walkout-copy"><div class="walkout-kicker">FIFA NIGHT • WALKOUT</div>
+    <div class="walkout-title">DYZIO</div><div class="walkout-ovr">99 OVR • POLSKA</div>
+    <div class="walkout-slogan">JESTEM KURWA NAJLEPSZY</div></div>
+    <button class="walkout-skip" type="button">POMIŃ INTRO »</button>`;
+  document.body.appendChild(overlay);
+  let ended=false; const finish=()=>{if(ended)return;ended=true;overlay.classList.add('fade-out');setTimeout(()=>overlay.remove(),950)};
+  overlay.querySelector('.walkout-skip').addEventListener('click',finish);
+  setTimeout(finish,7900);
+}
 function showPlayer(p){document.getElementById('home').classList.add('hidden');document.getElementById('profile').classList.remove('hidden');document.getElementById('profileContent').innerHTML=`<div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div><div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>`}
-const id=new URLSearchParams(location.search).get('player');const chosen=players.find(p=>p.id===id);if(chosen)showPlayer(chosen);else showHome();
+const id=new URLSearchParams(location.search).get('player');const chosen=players.find(p=>p.id===id);if(chosen){showPlayer(chosen);if(chosen.id==='dyzio')playDyzioWalkout()}else showHome();
 </script></body></html>
