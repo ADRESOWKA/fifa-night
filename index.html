@@ -12,7 +12,7 @@
 .stadium-label{font-size:10px;letter-spacing:.42em;color:#e9d18d;font-weight:900}.intro-name{font-size:clamp(28px,7vw,54px);font-weight:1000;letter-spacing:.12em;margin:9px 0 0;text-shadow:0 0 22px #e4bf5d88}.intro-rating{display:flex;justify-content:center;align-items:baseline;gap:9px;margin:2px 0}.intro-rating strong{font-size:clamp(58px,13vw,92px);line-height:1;color:#f3d47e;text-shadow:0 0 12px #e6c66c,0 0 36px #c99539;animation:rating-pop .9s cubic-bezier(.15,1.5,.4,1) .25s both}.intro-rating span{font-size:14px;letter-spacing:.2em;color:#fff}.intro-sub{font-size:11px;color:#d7e2e1;letter-spacing:.25em}.profilebox{animation:card-reveal .85s cubic-bezier(.2,.8,.2,1) .12s both;transform-origin:50% 65%}.profilebox img,.profilebox .placeholder{box-shadow:0 0 0 1px #e9cb7a,0 0 26px #e2b95055}.special{position:relative;overflow:hidden}.special:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-60%;width:35%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,#fff6,transparent);animation:shine 3.2s ease-in-out 1s infinite}.player:active{transform:scale(.98)}
 @keyframes intro-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes beams{from{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes rating-pop{0%{opacity:0;transform:scale(.25) rotate(-12deg)}70%{opacity:1;transform:scale(1.12) rotate(2deg)}100%{transform:scale(1) rotate(0)}}@keyframes card-reveal{0%{opacity:0;transform:perspective(900px) rotateX(18deg) translateY(35px) scale(.94)}100%{opacity:1;transform:perspective(900px) rotateX(0) translateY(0) scale(1)}}@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
 
-/* DYZIO WALKOUT — pełnoekranowe wejście przed kartą */
+/* WALKOUT — pełnoekranowe wejście przed kartą każdego zawodnika */
 .walkout{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#03050a;color:#f9e8b2;perspective:900px}
 .walkout.fade-out{animation:walkout-exit .9s ease forwards;pointer-events:none}
 .walkout-bg{position:absolute;inset:-12%;background:radial-gradient(ellipse at 50% 48%,#75501c 0,#201507 27%,#05070c 67%);animation:tunnel-push 7.8s cubic-bezier(.2,.65,.25,1) forwards}
@@ -38,6 +38,7 @@
 @keyframes title-in{to{opacity:1;transform:scale(1)}}
 @keyframes walkout-exit{to{opacity:0;visibility:hidden}}
 @media(max-width:650px){.walkout-person{width:82vw;height:62vh}.walkout-tunnel{inset:12% 8%}}
+.walkout-placeholder{display:grid;place-items:center;font-size:clamp(120px,28vw,260px);color:#e7c66c;background:radial-gradient(ellipse,#74602c88,transparent 68%);filter:drop-shadow(0 0 30px #e7c66c)}
 @media(prefers-reduced-motion:reduce){.walkout *{animation-duration:.01ms!important;animation-delay:0ms!important}}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
@@ -54,15 +55,15 @@ const players=[
 const cards=document.getElementById('cards');
 function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
-function playDyzioWalkout(){
-  if(new URLSearchParams(location.search).get('player')!=='dyzio') return;
-  const overlay=document.createElement('div'); overlay.className='walkout'; overlay.innerHTML=`
+function playPlayerWalkout(p){
+  const overlay=document.createElement('div'); overlay.className='walkout';
+  const person=p.img?`<img class="walkout-person" src="${p.img}" alt="">`:`<div class="walkout-person walkout-placeholder">⚽</div>`;
+  overlay.innerHTML=`
     <div class="walkout-bg"></div><div class="walkout-beams"></div><div class="walkout-tunnel"></div>
-    <div class="walkout-floor"></div><div class="walkout-smoke"></div>
-    <img class="walkout-person" src="assets/dyzio.png" alt="">
+    <div class="walkout-floor"></div><div class="walkout-smoke"></div>${person}
     <div class="walkout-copy"><div class="walkout-kicker">FIFA NIGHT • WALKOUT</div>
-    <div class="walkout-title">DYZIO</div><div class="walkout-ovr">99 OVR • POLSKA</div>
-    <div class="walkout-slogan">JESTEM KURWA NAJLEPSZY</div></div>
+    <div class="walkout-title">${p.name}</div><div class="walkout-ovr">${p.ovr} OVR • POLSKA • ${p.pos}</div>
+    <div class="walkout-slogan">${p.slogan}</div></div>
     <button class="walkout-skip" type="button">POMIŃ INTRO »</button>`;
   document.body.appendChild(overlay);
   let ended=false; const finish=()=>{if(ended)return;ended=true;overlay.classList.add('fade-out');setTimeout(()=>overlay.remove(),950)};
@@ -70,5 +71,26 @@ function playDyzioWalkout(){
   setTimeout(finish,7900);
 }
 function showPlayer(p){document.getElementById('home').classList.add('hidden');document.getElementById('profile').classList.remove('hidden');document.getElementById('profileContent').innerHTML=`<div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div><div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>`}
-const id=new URLSearchParams(location.search).get('player');const chosen=players.find(p=>p.id===id);if(chosen){showPlayer(chosen);if(chosen.id==='dyzio')playDyzioWalkout()}else showHome();
+const id=new URLSearchParams(location.search).get('player');
+const chosen=players.find(p=>p.id===id);
+let walkoutOverlay=null;
+function launchWalkout(){
+  if(!chosen) return;
+  // Nie dokładaj drugiego intro, jeśli poprzednie nadal jest widoczne.
+  if(walkoutOverlay && document.body.contains(walkoutOverlay)) return;
+  playPlayerWalkout(chosen);
+  walkoutOverlay=document.querySelector('.walkout:last-of-type');
+}
+if(chosen){showPlayer(chosen);launchWalkout()}else showHome();
+
+// NFC może ponownie aktywować już otwartą kartę przeglądarki.
+// W takim przypadku strona nie zawsze ładuje się od początku.
+let wasHidden=false;
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){wasHidden=true;return;}
+  if(wasHidden){wasHidden=false;launchWalkout();}
+});
+window.addEventListener('pageshow',(event)=>{
+  if(event.persisted) launchWalkout();
+});
 </script></body></html>
