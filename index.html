@@ -132,8 +132,6 @@ const cards=document.getElementById('cards');
 function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
 function playPlayerWalkout(p){
-
-function playPlayerWalkout(p){
   const videos = {
     kamil: 'KAMIL.mp4',
     mati: 'MATI.mp4',
