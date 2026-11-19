@@ -132,19 +132,78 @@ const cards=document.getElementById('cards');
 function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
 function playPlayerWalkout(p){
-  const overlay=document.createElement('div'); overlay.className='walkout';
-  const person=p.img?`<img class="walkout-person" src="${p.img}" alt="">`:`<div class="walkout-person walkout-placeholder">⚽</div>`;
-  overlay.innerHTML=`
-    <div class="walkout-bg"></div><div class="walkout-beams"></div><div class="walkout-tunnel"></div>
-    <div class="walkout-floor"></div><div class="walkout-smoke"></div>${person}
-    <div class="walkout-copy"><div class="walkout-kicker">FIFA NIGHT • WALKOUT</div>
-    <div class="walkout-title">${p.name}</div><div class="walkout-ovr">${p.ovr} OVR • POLSKA • ${p.pos}</div>
-    <div class="walkout-slogan">${p.slogan}</div></div>
-    <button class="walkout-skip" type="button">POMIŃ INTRO »</button>`;
+
+function playPlayerWalkout(p){
+  const videos = {
+    kamil: 'KAMIL.mp4',
+    mati: 'MATI.mp4',
+    dawid: 'Dawid.mp4',
+    dyzio: 'DYZIO.mp4'
+  };
+
+  const videoFile = videos[p.id];
+  if(!videoFile) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'walkout';
+
+  overlay.style.background = '#000';
+  overlay.style.display = 'block';
+
+  overlay.innerHTML = `
+    <video
+      id="walkoutVideo"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      style="width:100%;height:100%;object-fit:contain;background:#000">
+      <source src="${videoFile}" type="video/mp4">
+    </video>
+    <button class="walkout-skip" type="button">POMIŃ WALKOUT »</button>
+    <button id="soundButton" type="button"
+      style="position:absolute;z-index:6;right:18px;top:68px;
+      border:1px solid #e6c16c;background:#090b10bb;
+      color:#ffe6a2;padding:10px 15px;border-radius:30px;
+      font-weight:bold;cursor:pointer">
+      WŁĄCZ DŹWIĘK 🔊
+    </button>
+  `;
+
   document.body.appendChild(overlay);
-  let ended=false; const finish=()=>{if(ended)return;ended=true;overlay.classList.add('fade-out');setTimeout(()=>overlay.remove(),950)};
-  overlay.querySelector('.walkout-skip').addEventListener('click',finish);
-  setTimeout(finish,7900);
+
+  const video = overlay.querySelector('video');
+  let ended = false;
+
+  const finish = () => {
+    if(ended) return;
+    ended = true;
+    video.pause();
+    overlay.classList.add('fade-out');
+    setTimeout(() => overlay.remove(), 950);
+  };
+
+  overlay.querySelector('.walkout-skip')
+    .addEventListener('click', finish);
+
+  overlay.querySelector('#soundButton')
+    .addEventListener('click', () => {
+      video.muted = false;
+      video.volume = 1;
+      overlay.querySelector('#soundButton').textContent = 'DŹWIĘK WŁĄCZONY';
+    });
+
+  video.addEventListener('ended', finish);
+  video.addEventListener('error', () => {
+    alert('Nie udało się odtworzyć filmu: ' + videoFile);
+    finish();
+  });
+
+  video.play().catch(() => {
+    video.controls = true;
+  });
+}
+
 }
 function showPlayer(p){document.getElementById('home').classList.add('hidden');document.getElementById('profile').classList.remove('hidden');document.getElementById('profileContent').innerHTML=`<div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div><div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>`}
 const id=new URLSearchParams(location.search).get('player');
