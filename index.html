@@ -136,12 +136,13 @@ function playPlayerWalkout(p){
     kamil: './KAMIL.mp4',
     mati: './MATI.mp4',
     dawid: './Dawid.mp4',
-    dyzio: './DYZIO.mp4'
+    dyzio: './DYZIO.mp4',
+    tomek: './Tomek.mp4'
   };
 
   const videoFile = videos[p.id];
 
-  // Tomek nie ma jeszcze filmu — zostawiamy mu dotychczasowe intro graficzne.
+  // Odtwarzamy film Walkout przypisany do zawodnika.
   if(!videoFile){
     const overlay = document.createElement('div');
     overlay.className = 'walkout';
