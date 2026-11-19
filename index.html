@@ -122,7 +122,7 @@
 <div class="footer">ULTIMATE TEAM • FRIENDS LEAGUE</div></section><section id="profile" class="profile hidden"><a class="back" href="?">← POWRÓT DO ZAWODNIKÓW</a><div id="profileContent"></div></section></main>
 <script>
 const players=[
-{id:'tomek',name:'TOMEK',ovr:89,pos:'ST',slogan:'JEBANA FIFA',stats:{PAC:85,SHO:90,PAS:78,DRI:88,DEF:45,PHY:99},special:'TO GRA JEST ZEPSUTA',img:null},
+{id:'tomek',name:'TOMEK',ovr:89,pos:'CM',slogan:'JEBANI KONSOLowcy',stats:{PAC:84,SHO:86,PAS:90,DRI:88,DEF:82,PHY:87},special:'JEBANI KONSOLowcy',img:'assets/tomek.png'},
 {id:'mati',name:'MATI',ovr:91,pos:'CDM',slogan:'KURWA MAĆ',stats:{PAC:89,SHO:92,PAS:88,DRI:90,DEF:64,PHY:97},special:'KURWA MAĆ',img:'assets/mati.png'},
 {id:'kamil',name:'KAMIL',ovr:76,pos:'CM',slogan:'JA W TO NIE UMIEM GRAĆ',stats:{PAC:45,SHO:32,PAS:60,DRI:25,DEF:88,PHY:99},special:'PIERWSZY RAZ GRAM',img:'assets/kamil.png'},
 {id:'dawid',name:'DAWID',ovr:87,pos:'LW',slogan:'OSTATNIO GRAŁEM W FIFĘ 23',stats:{PAC:88,SHO:86,PAS:84,DRI:87,DEF:64,PHY:92},special:'W FIFIE 23 BYŁO INACZEJ',img:'assets/dawid.png'},
@@ -133,6 +133,7 @@ function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
 function playPlayerWalkout(p){
   const videos = {
+    tomek: './Tomek.mp4',
     kamil: './KAMIL.mp4',
     mati: './MATI.mp4',
     dawid: './Dawid.mp4',
