@@ -100,6 +100,16 @@
 @media(max-width:650px){.profile-tabs{display:grid;grid-template-columns:1fr 1fr}.profile-tab{padding:10px 7px;font-size:10px}.profile-tab-panel{padding:12px}}
 
 
+
+/* FIFA NIGHT NEWS STUDIO — główne wydanie wideo */
+.news-studio{margin:0 0 16px;padding:14px;background:linear-gradient(145deg,#172334,#090e17);border:1px solid #927a43;border-radius:12px;box-shadow:0 12px 30px #0008}
+.news-studio-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+.news-studio-title{font-size:clamp(17px,3vw,24px);font-weight:1000;letter-spacing:.08em;color:#f5d889}
+.news-studio-sub{font-size:9px;color:#9eacc0;letter-spacing:.15em;margin-top:4px}
+.news-studio video{display:block;width:100%;max-height:620px;aspect-ratio:16/9;object-fit:contain;background:#000;border:1px solid #594a2b;border-radius:9px}
+.news-studio-caption{color:#aebacc;font-size:10px;letter-spacing:.08em;margin-top:9px;text-align:center}
+@media(max-width:650px){.news-studio{padding:10px}.news-studio-head{align-items:flex-start;flex-direction:column}}
+
 /* FIFA NIGHT NEWS — redakcja sportowa z przymrużeniem oka */
 .news-section{max-width:1100px;margin:48px auto 0}
 .news-masthead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 20px;background:linear-gradient(110deg,#182536,#0b111b);border:1px solid #927a43;border-bottom:0;border-radius:18px 18px 0 0}
@@ -148,6 +158,20 @@
     <div><div class="news-brand">FIFA NIGHT <span>NEWS</span></div><small>NIEZALEŻNY SERWIS • ZERO OBIEKTYWIZMU</small></div>
     <div class="news-live">BREAKING NEWS</div>
   </div>
+  <section class="news-studio" aria-label="Wydanie wideo FIFA NIGHT NEWS">
+    <div class="news-studio-head">
+      <div>
+        <div class="news-studio-title">FIFA NIGHT NEWS STUDIO</div>
+        <div class="news-studio-sub">SPECJALNE WYDANIE • MATERIAŁ WIDEO</div>
+      </div>
+      <div class="news-live">BREAKING NEWS</div>
+    </div>
+    <video controls playsinline preload="metadata">
+      <source src="./news/fifa-night-breaking-news.mp4" type="video/mp4">
+      Twoja przeglądarka nie obsługuje odtwarzania wideo.
+    </video>
+    <div class="news-studio-caption">NAJNOWSZE DONIESIENIA Z OBOZU FIFA NIGHT</div>
+  </section>
   <div class="news-ticker"><span>⚽ NAJŚWIEŻSZE DONIESIENIA • DYZIO ZAPOWIADA DOMINACJĘ • MATI MILCZY PRZED MECZEM • KAMIL SZUKA FORMUŁY NA ZWYCIĘSTWO • REDAKCJA FIFA NIGHT NEWS NIE BIERZE ODPOWIEDZIALNOŚCI ZA OBRAŻONE EGO ⚽</span></div>
   <div class="news-layout">
     <div id="newsFeature"></div>
