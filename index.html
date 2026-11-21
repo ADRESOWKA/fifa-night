@@ -99,7 +99,65 @@
 .interview-empty{padding:20px;text-align:center;color:#9eacc0;border:1px dashed #927a43;border-radius:12px;background:#0a111c}
 @media(max-width:650px){.profile-tabs{display:grid;grid-template-columns:1fr 1fr}.profile-tab{padding:10px 7px;font-size:10px}.profile-tab-panel{padding:12px}}
 
+
+/* FIFA NIGHT NEWS — redakcja sportowa z przymrużeniem oka */
+.news-section{max-width:1100px;margin:48px auto 0}
+.news-masthead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 20px;background:linear-gradient(110deg,#182536,#0b111b);border:1px solid #927a43;border-bottom:0;border-radius:18px 18px 0 0}
+.news-brand{font-size:clamp(25px,5vw,39px);font-weight:1000;letter-spacing:.035em;color:#f5d889;text-shadow:0 0 18px #d6aa4b44}
+.news-brand span{color:#f5f1e8}
+.news-masthead small{display:block;color:#9eacc0;font-size:9px;letter-spacing:.2em;font-weight:900;margin-top:3px}
+.news-live{display:inline-flex;align-items:center;gap:7px;background:#8f2028;color:#fff;padding:8px 11px;border-radius:5px;font-size:9px;font-weight:1000;letter-spacing:.13em;white-space:nowrap}
+.news-live:before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;animation:news-pulse 1.2s infinite}
+@keyframes news-pulse{50%{opacity:.35}}
+.news-ticker{overflow:hidden;background:#a02029;color:#fff;padding:10px 14px;font-size:10px;font-weight:1000;letter-spacing:.13em;white-space:nowrap;border-bottom:1px solid #d18b64}
+.news-ticker span{display:inline-block;padding-left:100%;animation:news-scroll 24s linear infinite}
+@keyframes news-scroll{to{transform:translateX(-100%)}}
+.news-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:15px;padding:16px;background:linear-gradient(145deg,#172334,#0b111b 75%);border:1px solid #927a43;border-top:0;border-radius:0 0 18px 18px;box-shadow:0 18px 45px #0008}
+.news-feature{position:relative;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:23px;border:1px solid #6e5931;border-radius:13px;background:radial-gradient(ellipse at 75% 18%,#a52b303b,transparent 40%),linear-gradient(145deg,#29384b,#101722 65%,#080c13)}
+.news-feature:before{content:"FN";position:absolute;right:10px;top:-25px;font-size:clamp(130px,22vw,230px);font-weight:1000;letter-spacing:-.1em;color:#e7c66c0c;line-height:1}
+.news-feature>*{position:relative}
+.news-label{display:inline-block;width:max-content;max-width:100%;padding:6px 9px;background:#9f2028;color:#fff;border-radius:4px;font-size:9px;font-weight:1000;letter-spacing:.16em}
+.news-feature h3{font-size:clamp(27px,4vw,43px);line-height:1.04;color:#f5d889;margin:13px 0 9px;max-width:650px}
+.news-feature p{color:#d0d8e3;line-height:1.55;font-size:13px;max-width:650px;margin:0 0 14px}
+.news-meta{color:#91a0b5;font-size:9px;letter-spacing:.1em;font-weight:900}
+.news-read{align-self:flex-start;margin-top:15px;border:1px solid #c7a65d;border-radius:6px;padding:10px 14px;background:linear-gradient(135deg,#80652d,#3b301c);color:#ffe6a2;font-weight:1000;font-size:10px;letter-spacing:.1em;cursor:pointer}
+.news-read:hover{filter:brightness(1.2)}
+.news-side{display:grid;gap:12px;align-content:start}
+.news-side-title{color:#f5d889;font-size:11px;font-weight:1000;letter-spacing:.18em;padding:3px 2px 9px;border-bottom:1px solid #6f5b32}
+.news-card{padding:14px;background:#0b121d;border:1px solid #304057;border-radius:10px}
+.news-card h4{font-size:16px;line-height:1.2;color:#f1e2bd;margin:8px 0}
+.news-card p{font-size:11px;line-height:1.45;color:#aebacc;margin:0}
+.news-card .news-meta{display:block;margin-top:9px}
+.news-tag{display:inline-block;color:#f3d58c;border:1px solid #806b3d;border-radius:4px;padding:4px 6px;font-size:8px;font-weight:1000;letter-spacing:.12em}
+.news-card .news-read{margin-top:10px;padding:8px 10px;font-size:9px}
+.news-modal{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;padding:18px;background:#02050bd9;backdrop-filter:blur(8px)}
+.news-modal.hidden{display:none}
+.news-modal-box{position:relative;width:min(100%,720px);max-height:88vh;overflow:auto;padding:25px;background:linear-gradient(145deg,#1a2738,#0a1019);border:1px solid #b99a53;border-radius:16px;box-shadow:0 25px 80px #000c}
+.news-close{position:absolute;right:13px;top:13px;border:1px solid #8d7440;border-radius:50%;width:36px;height:36px;background:#0b111b;color:#f5d889;font-size:20px;cursor:pointer}
+.news-modal-box h3{font-size:clamp(25px,5vw,40px);line-height:1.08;color:#f5d889;margin:15px 40px 10px 0}
+.news-modal-body{color:#d3dce8;font-size:14px;line-height:1.75;white-space:pre-line;margin-top:18px}
+.news-modal-foot{margin-top:20px;padding-top:12px;border-top:1px solid #39475a;color:#9eacc0;font-size:10px;letter-spacing:.1em}
+.news-editor-note{grid-column:1/-1;color:#7f8da1;font-size:9px;text-align:center;letter-spacing:.08em;padding:2px}
+@media(max-width:720px){.news-layout{grid-template-columns:1fr;padding:11px}.news-feature{min-height:270px;padding:18px}.news-masthead{padding:15px}.news-modal-box{padding:20px 16px}}
+
 </style></head><body><main class="wrap"><header class="top"><div class="eyebrow">EDYCJA SPECJALNA • 2026</div><h1>FIFA NIGHT</h1><p>Pięciu zawodników. Jedna korona. Zero litości.</p></header><div class="rule"></div><section id="home"><div class="grid" id="cards"></div>
+
+
+<section class="news-section" id="fifa-news">
+  <div class="news-masthead">
+    <div><div class="news-brand">FIFA NIGHT <span>NEWS</span></div><small>NIEZALEŻNY SERWIS • ZERO OBIEKTYWIZMU</small></div>
+    <div class="news-live">BREAKING NEWS</div>
+  </div>
+  <div class="news-ticker"><span>⚽ NAJŚWIEŻSZE DONIESIENIA • DYZIO ZAPOWIADA DOMINACJĘ • MATI MILCZY PRZED MECZEM • KAMIL SZUKA FORMUŁY NA ZWYCIĘSTWO • REDAKCJA FIFA NIGHT NEWS NIE BIERZE ODPOWIEDZIALNOŚCI ZA OBRAŻONE EGO ⚽</span></div>
+  <div class="news-layout">
+    <div id="newsFeature"></div>
+    <div class="news-side"><div class="news-side-title">🗞️ WIĘCEJ WIADOMOŚCI</div><div id="newsList"></div></div>
+    <div class="news-editor-note">MATERIAŁY REDAKCYJNE FIFA NIGHT NEWS • SATYRA SPORTOWA • WSZELKIE PODOBIEŃSTWA DO PRAWDZIWYCH WYPOWIEDZI SĄ ZAMIERZONE 😉</div>
+  </div>
+</section>
+<div id="newsModal" class="news-modal hidden" role="dialog" aria-modal="true" aria-labelledby="newsModalTitle">
+  <article class="news-modal-box"><button class="news-close" type="button" aria-label="Zamknij artykuł" onclick="closeNewsArticle()">×</button><div id="newsModalContent"></div></article>
+</div>
 
 <section class="league-section">
  <div class="section-kicker">FIFA NIGHT • HALL OF FAME</div>
@@ -142,6 +200,50 @@ const players=[
 {id:'dawid',name:'DAWID',ovr:87,pos:'LW',slogan:'OSTATNIO GRAŁEM W FIFĘ 23',stats:{PAC:88,SHO:86,PAS:84,DRI:87,DEF:64,PHY:92},special:'W FIFIE 23 BYŁO INACZEJ',img:'assets/dawid.png'},
 {id:'dyzio',name:'DYZIO',ovr:99,pos:'ST',slogan:'JESTEM KURWA NAJLEPSZY',stats:{PAC:99,SHO:99,PAS:99,DRI:99,DEF:99,PHY:99},special:'EGO WIĘKSZE NIŻ STADION',img:'assets/dyzio.png'}
 ];
+
+// FIFA NIGHT NEWS — nowe artykuły dopisujemy do tej listy.
+// Treści może przygotować redakcja (ChatGPT), a publikujesz je ręcznie po sprawdzeniu.
+const newsArticles = [
+  {
+    id:'dyzio-wojna', category:'GORĄCY TEMAT', date:'21.11.2026', author:'Redakcja FN',
+    title:'DYZIO OGŁASZA WOJNĘ RYWALOM!',
+    lead:'„Nie interesuje mnie drugie miejsce. Interesuje mnie tylko to, kto będzie płakał po turnieju”.',
+    body:'W specjalnym oświadczeniu Dyzio zapowiedział pełną dominację podczas FIFA NIGHT.\n\n„Przyjechałem tu po swoje. Reszta zawodników może już teraz zacząć szukać wymówek” — przekazał naszemu reporterowi.\n\nEksperci redakcji zwracają jednak uwagę, że pewność siebie zawodnika jest obecnie większa niż pojemność stadionu. Rywale nie skomentowali jeszcze deklaracji. Mati podobno wyłączył telefon, a Kamil nadal analizuje ustawienia kontrolera.\n\nFIFA NIGHT NEWS będzie monitorować sytuację. Jeśli Dyzio przegra, przygotowaliśmy już specjalne wydanie „Co poszło nie tak?”.'
+  },
+  {
+    id:'mati-milczy', category:'KULISY', date:'21.11.2026', author:'Dział Śledczy FN',
+    title:'MATI MILCZY. OToczenie ZAWODNIKA ZABIERA GŁOS',
+    lead:'Przed turniejem zapadła cisza. Czy to element strategii, czy po prostu brak zasięgu?',
+    body:'Mati nie odpowiedział na pytania dziennikarzy dotyczące swojej aktualnej formy. Jego obóz przekazał jedynie, że zawodnik „jest skupiony na celu”.\n\nNasi eksperci interpretują tę wypowiedź na trzy sposoby: tajna taktyka, pełna koncentracja albo oczekiwanie na dostawę jedzenia.\n\nJedno jest pewne — rywale nie mogą lekceważyć zawodnika, który potrafi milczeć nawet wtedy, gdy wszyscy czekają na komentarz.'
+  },
+  {
+    id:'kamil-trening', category:'ANALIZA', date:'21.11.2026', author:'Janusz Taktyczny',
+    title:'KAMIL WRACA DO TRENINGÓW. „TYM RAZEM WIEM, KTÓRYM GRACZEM STERUJĘ”',
+    lead:'Sztab szkoleniowy podobno pracuje nad nowatorską taktyką: podać do swojego.',
+    body:'Kamil rozpoczął przygotowania do FIFA NIGHT. Według niepotwierdzonych informacji trening obejmuje ćwiczenia podań, strzałów oraz rozpoznawania kierunku ataku.\n\n„Czuję progres. Ostatnio przez większość meczu wiedziałem, co robię” — miał powiedzieć zawodnik.\n\nRedakcja przypomina, że w sporcie najważniejsza jest wiara w siebie. Nawet jeśli piłka czasami ma inne plany.'
+  }
+];
+
+function renderFifaNews(){
+  const feature=document.getElementById('newsFeature');
+  const list=document.getElementById('newsList');
+  if(!feature || !list || !newsArticles.length) return;
+  const main=newsArticles[0];
+  feature.innerHTML=`<article class="news-feature"><span class="news-label">${main.category}</span><h3>${main.title}</h3><p>${main.lead}</p><div class="news-meta">${main.date} • ${main.author}</div><button class="news-read" type="button" onclick="openNewsArticle('${main.id}')">CZYTAJ CAŁY ARTYKUŁ »</button></article>`;
+  list.innerHTML=newsArticles.slice(1).map(article=>`<article class="news-card"><span class="news-tag">${article.category}</span><h4>${article.title}</h4><p>${article.lead}</p><span class="news-meta">${article.date} • ${article.author}</span><button class="news-read" type="button" onclick="openNewsArticle('${article.id}')">CZYTAJ WIĘCEJ »</button></article>`).join('');
+}
+function openNewsArticle(articleId){
+  const article=newsArticles.find(item=>item.id===articleId);
+  if(!article) return;
+  document.getElementById('newsModalContent').innerHTML=`<span class="news-label">${article.category}</span><h3 id="newsModalTitle">${article.title}</h3><p style="color:#f1e5c5;font-size:15px;line-height:1.5">${article.lead}</p><div class="news-meta">${article.date} • ${article.author}</div><div class="news-modal-body">${article.body}</div><div class="news-modal-foot">FIFA NIGHT NEWS • SERWIS INFORMACYJNY, KTÓREMU NIE POWINIENEŚ UFAĆ W 100%</div>`;
+  document.getElementById('newsModal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+function closeNewsArticle(){
+  document.getElementById('newsModal').classList.add('hidden');
+  document.body.style.overflow='';
+}
+
 const cards=document.getElementById('cards');
 function cardArt(p){return p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}
 function showHome(){document.getElementById('home').classList.remove('hidden');document.getElementById('profile').classList.add('hidden');cards.innerHTML=players.map(p=>`<a class="player" href="?player=${p.id}">${cardArt(p)}<div class="meta"><b>${p.name}</b><span>${p.ovr} OVR • ${p.pos} • ${p.slogan}</span></div></a>`).join('')}
@@ -283,6 +385,9 @@ function launchWalkout(){
   if(walkoutOverlay && document.body.contains(walkoutOverlay)) return;
   walkoutOverlay = playPlayerWalkout(chosen);
 }
+renderFifaNews();
+document.getElementById('newsModal').addEventListener('click',event=>{if(event.target.id==='newsModal') closeNewsArticle();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape') closeNewsArticle();});
 if(chosen){showPlayer(chosen);launchWalkout()}else showHome();
 
 // NFC może ponownie aktywować już otwartą kartę przeglądarki.
