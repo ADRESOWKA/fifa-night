@@ -238,11 +238,13 @@ function playPlayerWalkout(p){
 }
 function showPlayer(p){
   const interviewFiles = {
-    tomek: ['./wypowiedzi/tomek.mp4'],
-    mati: ['./wypowiedzi/mati.mp4'],
-    kamil: ['./wypowiedzi/kamil.mp4'],
-    dawid: ['./wypowiedzi/dawid.mp4'],
-    dyzio: ['./wypowiedzi/dyzio.mp4']
+    // Pliki dodane na GitHubie — nazwy zgodne z ustaleniami.
+    mati: ['./wypowiedzi/matifilm.mp4'],
+    kamil: ['./wypowiedzi/kamilfilm.mp4'],
+    dyzio: ['./wypowiedzi/dyziofilm.mp4'],
+    // Tomek i Dawid: dodamy filmy później.
+    tomek: [],
+    dawid: []
   };
   const videos = interviewFiles[p.id] || [];
   const interviewContent = videos.length
