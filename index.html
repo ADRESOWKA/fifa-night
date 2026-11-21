@@ -85,6 +85,20 @@
 .fn-end{text-align:center}
 @media(max-width:650px){.fn-rounds{grid-template-columns:1fr}.fn-gallery{grid-template-columns:1fr;text-align:center}.fn-gallery .uploaded-certificate{max-width:240px}.fn-progress{font-size:9px}}
 
+/* ZAKŁADKI PROFILU I PRZEDTURNIEJOWE WYPOWIEDZI */
+.profile-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
+.profile-tab{border:1px solid #927a43;border-radius:9px;padding:11px 15px;background:#121a25;color:#cbd4df;font-weight:900;font-size:11px;letter-spacing:.08em;cursor:pointer}
+.profile-tab.active{background:linear-gradient(135deg,#80652d,#3b301c);color:#ffe6a2;border-color:#e7c66c;box-shadow:0 0 18px #e7c66c33}
+.profile-tab-panel{background:#101722;border:1px solid #927a43;border-radius:14px;padding:18px;margin-top:10px}
+.interview-heading{color:var(--gold);font-size:clamp(20px,4vw,28px);letter-spacing:.07em;margin:0 0 7px}
+.interview-desc{color:var(--muted);font-size:13px;margin:0 0 16px}
+.interview-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+.interview-item{background:#0a111c;border:1px solid #34445a;border-radius:12px;padding:12px;min-width:0}
+.interview-item video{display:block;width:100%;max-height:420px;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:8px}
+.interview-item h4{color:#f5d889;margin:10px 0 4px;font-size:14px}
+.interview-empty{padding:20px;text-align:center;color:#9eacc0;border:1px dashed #927a43;border-radius:12px;background:#0a111c}
+@media(max-width:650px){.profile-tabs{display:grid;grid-template-columns:1fr 1fr}.profile-tab{padding:10px 7px;font-size:10px}.profile-tab-panel{padding:12px}}
+
 </style></head><body><main class="wrap"><header class="top"><div class="eyebrow">EDYCJA SPECJALNA • 2026</div><h1>FIFA NIGHT</h1><p>Pięciu zawodników. Jedna korona. Zero litości.</p></header><div class="rule"></div><section id="home"><div class="grid" id="cards"></div>
 
 <section class="league-section">
@@ -222,7 +236,42 @@ function playPlayerWalkout(p){
   });
   return overlay;
 }
-function showPlayer(p){document.getElementById('home').classList.add('hidden');document.getElementById('profile').classList.remove('hidden');document.getElementById('profileContent').innerHTML=`<div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div><div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>`}
+function showPlayer(p){
+  const interviewFiles = {
+    tomek: ['./wypowiedzi/tomek.mp4'],
+    mati: ['./wypowiedzi/mati.mp4'],
+    kamil: ['./wypowiedzi/kamil.mp4'],
+    dawid: ['./wypowiedzi/dawid.mp4'],
+    dyzio: ['./wypowiedzi/dyzio.mp4']
+  };
+  const videos = interviewFiles[p.id] || [];
+  const interviewContent = videos.length
+    ? `<div class="interview-list">${videos.map((file,i)=>`<article class="interview-item"><video controls playsinline preload="metadata"><source src="${file}" type="video/mp4">Twoja przeglądarka nie obsługuje wideo.</video><h4>Wypowiedź przedturniejowa ${videos.length>1?i+1:''}</h4></article>`).join('')}</div>`
+    : `<div class="interview-empty">Brak dodanych wypowiedzi. Film pojawi się tutaj po dodaniu pliku MP4 do folderu „wypowiedzi”.</div>`;
+
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('profile').classList.remove('hidden');
+  document.getElementById('profileContent').innerHTML = `
+    <div class="profile-intro"><div class="stadium-label">FIFA NIGHT • PLAYER WALKOUT</div><div class="intro-name">${p.name}</div><div class="intro-rating"><strong>${p.ovr}</strong><span>OVR</span></div><div class="intro-sub">${p.pos} &nbsp; • &nbsp; POLSKA &nbsp; • &nbsp; ULTIMATE TEAM</div></div>
+    <div class="profile-tabs" role="tablist" aria-label="Sekcje zawodnika">
+      <button class="profile-tab active" type="button" data-tab="player-profile">PROFIL ZAWODNIKA</button>
+      <button class="profile-tab" type="button" data-tab="player-interviews">PRZEDTURNIEJOWE WYPOWIEDZI</button>
+    </div>
+    <section class="profile-tab-panel" id="player-profile">
+      <div class="profilebox">${p.img?`<img src="${p.img}" alt="Karta ${p.name}">`:`<div class="placeholder"><div class="rating">${p.ovr}</div><div class="ovr">OVR • ${p.pos}</div><div class="silhouette">⚽</div><div class="name">${p.name}</div><div class="ovr">JOKER EDITION</div></div>`}<div class="pinfo"><div class="ovrline">${p.ovr} OVR • ${p.pos}</div><h2>${p.name}</h2><div class="slogan">„${p.slogan}”</div><div class="stats">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><small>${k}</small><b>${v}</b></div>`).join('')}</div><div class="special"><small>CECHA SPECJALNA</small><br><b>${p.special}</b></div></div></div>
+    </section>
+    <section class="profile-tab-panel hidden" id="player-interviews">
+      <h3 class="interview-heading">PRZEDTURNIEJOWE WYPOWIEDZI</h3>
+      <p class="interview-desc">Oficjalne wypowiedzi zawodnika przed FIFA NIGHT.</p>
+      ${interviewContent}
+    </section>`;
+
+  const tabButtons = document.querySelectorAll('.profile-tab');
+  tabButtons.forEach(button => button.addEventListener('click', () => {
+    tabButtons.forEach(item => item.classList.toggle('active', item === button));
+    document.querySelectorAll('.profile-tab-panel').forEach(panel => panel.classList.toggle('hidden', panel.id !== button.dataset.tab));
+  }));
+}
 const id=new URLSearchParams(location.search).get('player');
 const chosen=players.find(p=>p.id===id);
 let walkoutOverlay=null;
