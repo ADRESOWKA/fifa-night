@@ -282,7 +282,12 @@ function renderFifaNews(){
 function openNewsArticle(articleId){
   const article=newsArticles.find(item=>item.id===articleId);
   if(!article) return;
-  const articleVideo = articleId === 'dyzio-wojna' ? '<video class="news-article-video" controls playsinline preload="metadata"><source src="./news/dyzio-wywiad.mp4" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>' : '';
+  let articleVideo = '';
+  if(articleId === 'dyzio-wojna'){
+    articleVideo = '<video class="news-article-video" controls playsinline preload="metadata"><source src="./news/dyzio-wywiad.mp4" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>';
+  } else if(articleId === 'tomek-gospodarz'){
+    articleVideo = '<video class="news-article-video" controls playsinline preload="metadata"><source src="./news/tomek-wywiad.mp4" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>';
+  }
   document.getElementById('newsModalContent').innerHTML=`<span class="news-label">${article.category}</span><h3 id="newsModalTitle">${article.title}</h3><p style="color:#f1e5c5;font-size:15px;line-height:1.5">${article.lead}</p><div class="news-meta">${article.date} • ${article.author}</div><div class="news-modal-body">${article.body}</div>${articleVideo}<div class="news-modal-foot">FIFA NIGHT NEWS • SERWIS INFORMACYJNY, KTÓREMU NIE POWINIENEŚ UFAĆ W 100%</div>`;
   document.getElementById('newsModal').classList.remove('hidden');
   document.body.style.overflow='hidden';
