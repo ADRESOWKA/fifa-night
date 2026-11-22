@@ -146,6 +146,7 @@
 .news-close{position:absolute;right:13px;top:13px;border:1px solid #8d7440;border-radius:50%;width:36px;height:36px;background:#0b111b;color:#f5d889;font-size:20px;cursor:pointer}
 .news-modal-box h3{font-size:clamp(25px,5vw,40px);line-height:1.08;color:#f5d889;margin:15px 40px 10px 0}
 .news-modal-body{color:#d3dce8;font-size:14px;line-height:1.75;white-space:pre-line;margin-top:18px}
+.news-article-video{display:block;width:100%;max-height:520px;margin:22px auto 8px;border:1px solid #806b3d;border-radius:12px;background:#000;object-fit:contain}
 .news-modal-foot{margin-top:20px;padding-top:12px;border-top:1px solid #39475a;color:#9eacc0;font-size:10px;letter-spacing:.1em}
 .news-editor-note{grid-column:1/-1;color:#7f8da1;font-size:9px;text-align:center;letter-spacing:.08em;padding:2px}
 @media(max-width:720px){.news-layout{grid-template-columns:1fr;padding:11px}.news-feature{min-height:270px;padding:18px}.news-masthead{padding:15px}.news-modal-box{padding:20px 16px}}
@@ -281,7 +282,8 @@ function renderFifaNews(){
 function openNewsArticle(articleId){
   const article=newsArticles.find(item=>item.id===articleId);
   if(!article) return;
-  document.getElementById('newsModalContent').innerHTML=`<span class="news-label">${article.category}</span><h3 id="newsModalTitle">${article.title}</h3><p style="color:#f1e5c5;font-size:15px;line-height:1.5">${article.lead}</p><div class="news-meta">${article.date} • ${article.author}</div><div class="news-modal-body">${article.body}</div><div class="news-modal-foot">FIFA NIGHT NEWS • SERWIS INFORMACYJNY, KTÓREMU NIE POWINIENEŚ UFAĆ W 100%</div>`;
+  const articleVideo = articleId === 'dyzio-wojna' ? '<video class="news-article-video" controls playsinline preload="metadata"><source src="./news/dyzio-wywiad.mp4" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>' : '';
+  document.getElementById('newsModalContent').innerHTML=`<span class="news-label">${article.category}</span><h3 id="newsModalTitle">${article.title}</h3><p style="color:#f1e5c5;font-size:15px;line-height:1.5">${article.lead}</p><div class="news-meta">${article.date} • ${article.author}</div><div class="news-modal-body">${article.body}</div>${articleVideo}<div class="news-modal-foot">FIFA NIGHT NEWS • SERWIS INFORMACYJNY, KTÓREMU NIE POWINIENEŚ UFAĆ W 100%</div>`;
   document.getElementById('newsModal').classList.remove('hidden');
   document.body.style.overflow='hidden';
 }
